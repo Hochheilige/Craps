@@ -1,9 +1,12 @@
-import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r125/build/three.module.js';
+import * as THREE from "/build/three.module.js";
+import * as Ammo from "/ammo/ammo.js";
 
 let dices;
 let board;
 
 function main() {
+  let collisionConfiguration = new Ammo.btDefaultCollisionConfiguration();
+
   const canvas = document.getElementById("c");
   const renderer = new THREE.WebGLRenderer({ canvas });
   const camera = createCamera();
@@ -32,22 +35,22 @@ function createDiceTexture() {
   const loader = new THREE.TextureLoader();
   return [
     new THREE.MeshBasicMaterial({
-      map: loader.load("src/resources/images/gran1.png")
+      map: loader.load("resources/images/gran1.png")
     }),
     new THREE.MeshBasicMaterial({
-      map: loader.load("src/resources/images/gran2.png")
+      map: loader.load("resources/images/gran2.png")
     }),
     new THREE.MeshBasicMaterial({
-      map: loader.load("src/resources/images/gran3.png")
+      map: loader.load("resources/images/gran3.png")
     }),
     new THREE.MeshBasicMaterial({
-      map: loader.load("src/resources/images/gran4.png")
+      map: loader.load("resources/images/gran4.png")
     }),
     new THREE.MeshBasicMaterial({
-      map: loader.load("src/resources/images/gran5.png")
+      map: loader.load("resources/images/gran5.png")
     }),
     new THREE.MeshBasicMaterial({
-      map: loader.load("src/resources/images/gran6.png")
+      map: loader.load("resources/images/gran6.png")
     })
   ];
 }

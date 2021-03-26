@@ -1,0 +1,11 @@
+{
+  "name": "craps",
+  "version": "1.0.0",
+  "description": "Three.js example starter project",
+  "main": "index.html",
+  "dependencies": {
+    "express": "^4.17.1",
+    "three": "^0.126.1",
+    "ammo.js": "0.0.10"
+  }
+}
