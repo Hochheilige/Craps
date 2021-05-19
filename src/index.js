@@ -1,12 +1,10 @@
 import * as THREE from "/build/three.module.js";
-import * as Ammo from "/ammo/ammo.js";
+import * as Ammo from "/lib/ammo.js";
 
 let dices;
 let board;
 
 function main() {
-  let collisionConfiguration = new Ammo.btDefaultCollisionConfiguration();
-
   const canvas = document.getElementById("c");
   const renderer = new THREE.WebGLRenderer({ canvas });
   const camera = createCamera();

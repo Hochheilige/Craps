@@ -4,7 +4,6 @@ const path = require('path')
 
 app.use(express.static(__dirname + '/src'))
 app.use('/build/', express.static(path.join(__dirname, 'node_modules/three/build')));
-app.use('/ammo/', express.static(path.join(__dirname, 'node_modules/ammo.js')));
 app.use('/jsm/', express.static(path.join(__dirname, 'node_modules/three/examples/jsm')));
 
 app.listen(3000, () =>
