@@ -2,9 +2,10 @@ import * as THREE from "/build/three.module.js";
 
 let dices;
 let board;
+const threejsObjects = new Map();
 
 function main() {
-  let worker = new Worker('worker.js');
+  const worker = new Worker('worker.js');
   const canvas = document.getElementById("c");
   const renderer = new THREE.WebGLRenderer({ canvas });
   const camera = createCamera();
@@ -15,6 +16,10 @@ function main() {
   scene.add(board);
   dices.forEach((dice) => scene.add(dice));
   addLight(scene, 1, 1, 3);
+
+  
+  worker.postMessage({msg: 'createPhysicObjects', data: dices }, [dices])
+  worker.postMessage({msg: 'createPhysicObject',  data: board }, [board])
 
   renderObjects(scene, camera, renderer);
 }
@@ -74,6 +79,8 @@ function createBoard() {
   board.position.x = 0;
   board.position.y = 0;
   board.position.z = -20;
+
+  threejsObjects.set(board.uuid, board)
   return board;
 }
 
@@ -89,6 +96,7 @@ function createDice(size, x, y, z) {
   if (y !== undefined && y !== null) cube.position.y = y;
   if (z !== undefined && z !== null) cube.position.z = z;
 
+  threejsObjects.set(cube.uuid, cube)
   return cube;
 }
 
@@ -106,7 +114,7 @@ function convertToSeconds(time) {
 
 function resizeRendererToDisplaySize(renderer, camera) {
   const canvas = renderer.domElement;
-  const pixelRatio = window.devicePixelRatio; //needs to optimise rendering for hd dpi
+  const pixelRatio = window.devicePixelRatio;
   const width = (canvas.clientWidth * pixelRatio) | 0;
   const height = (canvas.clientHeight * pixelRatio) | 0;
 
@@ -124,7 +132,6 @@ function animate(time) {
   dices.forEach((obj) => {
     obj.rotation.z = time;
     obj.rotation.x = time;
-    obj.position.z = -time*4;
   });
 }
 
